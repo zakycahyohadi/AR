@@ -3,20 +3,38 @@
     <title>F1 Mercedes AR</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+
+    <!-- Optional: Debug event listener -->
+    <script>
+      AFRAME.registerComponent('log-load', {
+        init: function () {
+          this.el.addEventListener('model-loaded', () => {
+            console.log('✅ Model loaded!');
+          });
+          this.el.addEventListener('model-error', (e) => {
+            console.error('❌ Model load error:', e.detail.src);
+          });
+        }
+      });
+    </script>
   </head>
 
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
 
+      <!-- Marker yang kamu buat -->
       <a-marker type="pattern" url="pattern-logo-f1-petronas.patt">
+        <!-- Model 3D mobil F1 -->
         <a-entity 
           gltf-model="f1_mercedes_w13_concept.glb" 
-          scale="0.05 0.05 0.05" 
-          position="0 0 0" 
-          rotation="0 0 0">
+          scale="0.4 0.4 0.4" 
+          position="0 1 0" 
+          rotation="0 180 0"
+          log-load>
         </a-entity>
       </a-marker>
 
+      <!-- Kamera AR -->
       <a-entity camera></a-entity>
     </a-scene>
   </body>
