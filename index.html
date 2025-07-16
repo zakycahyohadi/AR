@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Happytos AR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
+      
+      <!-- Marker pattern kamu -->
+      <a-marker type="pattern" url="pattern-logo-f1-petronas.patt">
+        
+        <!-- Model 3D Happytos -->
+        <a-entity 
+          gltf-model="f1_mercedes_w13_concept.glb" 
+          scale="0.3 0.3 0.3" 
+          position="0 0 0" 
+          rotation="0 0 0">
+        </a-entity>
+
+      </a-marker>
+      
+      <!-- Kamera AR -->
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
