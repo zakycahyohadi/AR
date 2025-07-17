@@ -1,10 +1,37 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>F1 Mercedes AR</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
-
-    <!-- Optional: Debug event listener -->
+    <style>
+      #status {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+      }
+      #instructions {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+    </style>
     <script>
       AFRAME.registerComponent('log-load', {
         init: function () {
@@ -16,26 +43,52 @@
           });
         }
       });
+      AFRAME.registerComponent('marker-handler', {
+        init: function () {
+          this.el.addEventListener('markerFound', () => {
+            document.getElementById('status').innerText = 'Marker terdeteksi!';
+            console.log('🎯 Marker detected!');
+          });
+          this.el.addEventListener('markerLost', () => {
+            document.getElementById('status').innerText = 'Mencari marker...';
+            console.log('❌ Marker lost');
+          });
+        }
+      });
     </script>
   </head>
-
   <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs>
-
-      <!-- Marker yang kamu buat -->
-      <a-marker type="pattern" url="pattern-marker.patt">
-        <!-- Model 3D mobil F1 -->
+    <div id="status">Mencari marker...</div>
+    <div id="instructions">
+      📱 Arahkan kamera ke pattern marker<br>
+      🎯 Pastikan pencahayaan cukup dan pattern terlihat jelas
+    </div>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+      <!-- Marker utama -->
+      <a-marker type="pattern" url="pattern-marker.patt" marker-handler>
         <a-entity 
           gltf-model="f1_mercedes_w13_concept.glb" 
           scale="0.4 0.4 0.4" 
-          position="0 1 0" 
+          position="0 0 0" 
           rotation="0 180 0"
           log-load>
         </a-entity>
+        <a-light type="ambient" color="#fff" intensity="0.7"></a-light>
+        <a-light type="directional" color="#fff" intensity="0.7" position="0 2 1"></a-light>
       </a-marker>
-
-      <!-- Kamera AR -->
+      <!-- Marker alternatif -->
+      <a-marker type="pattern" url="pattern-logo-f1-petronas.patt" marker-handler>
+        <a-entity 
+          gltf-model="f1_mercedes_w13_concept.glb" 
+          scale="0.3 0.3 0.3" 
+          position="0 0 0" 
+          rotation="0 180 0"
+          log-load>
+        </a-entity>
+        <a-light type="ambient" color="#fff" intensity="0.7"></a-light>
+        <a-light type="directional" color="#fff" intensity="0.7" position="0 2 1"></a-light>
+      </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
   </body>
-</html>
+</html> 
