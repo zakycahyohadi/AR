@@ -7,10 +7,8 @@
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
-
     <script src="https://unpkg.com/aframe-gesture-detector@3.3.0/dist/aframe-gesture-detector.min.js"></script>
-  <script src="https://unpkg.com/aframe-super-hands-component@4.0.5/dist/aframe-super-hands-component.min.js"></script>
-
+    <script src="https://unpkg.com/aframe-super-hands-component@4.0.5/dist/aframe-super-hands-component.min.js"></script>
 
     <style>
       #status {
@@ -74,19 +72,23 @@
     <div id="debug">Loading...</div>
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+      <a-assets>
+        <a-asset-item id="modelGLB" src="destroyer.glb"></a-asset-item>
+      </a-assets>
+
       <a-marker
         type="pattern"
         url="https://raw.githubusercontent.com/zakycahyohadi/AR/master/pattern-marker.patt"
         marker-handler
       >
-      <a-entity
-      gltf-model="destroyer.glb"
-      position="0 0 0"
-      scale="1 1 1"
-      rotation="0 0 0"
-      gesture-handler
-    ></a-entity>
-    
+        <a-entity
+          gltf-model="#modelGLB"
+          position="0 0 0"
+          scale="0.5 0.5 0.5"
+          rotation="0 0 0"
+          gesture-handler
+          log-load
+        ></a-entity>
 
         <a-light type="ambient" color="#fff" intensity="0.7"></a-light>
         <a-light
