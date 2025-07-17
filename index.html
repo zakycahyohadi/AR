@@ -7,7 +7,6 @@
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
 
     <style>
       #status {
@@ -77,18 +76,23 @@
         marker-handler
       >
         <a-entity
-          gltf-model="https://zakycahyohadi.github.io/AR/destroyer.glb"
-          scale="5 5 5"
-          position="0 0.5 0"
+          gltf-model="destroyer.glb"
+          scale="0.4 0.4 0.4"
+          position="0 0 0"
           rotation="0 0 0"
           log-load
         ></a-entity>
 
         <a-light type="ambient" color="#fff" intensity="0.7"></a-light>
-        <a-light type="directional" color="#fff" intensity="0.7" position="0 1 1"></a-light>
+        <a-light
+          type="directional"
+          color="#fff"
+          intensity="0.7"
+          position="0 1 1"
+        ></a-light>
       </a-marker>
 
-      <a-entity camera look-controls orbit-controls="autoRotate: false; enableZoom: true;"></a-entity>
+      <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
